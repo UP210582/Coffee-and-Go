@@ -1,0 +1,47 @@
+# Node modules
+*/node_modules/
+/.yarn
+/node_modules
+package-lock.json
+yarn.lock
+*/.yarn
+
+#KeystoneJS
+backend/.keystone/
+*.log
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+*/node_modules/
+
+# Build directories
+*/build/
+*/dist/
+
+# Expo
+ClassTrack/node_modules/
+ClassTrack/.expo/
+ClassTrack/.expo-shared/
+ClassTrack/dist/
+ClassTrack/npm-debug.*
+ClassTrack/web-build/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+# macOS
+.DS_Store
+
+
+# Misc
+.DS_Store
+.env
