@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mi_db
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  keystone:
+    build: ./backend-keystone
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/mi_db
+      REDIS_HOST: redis
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "3000:3000"
+
+  fastapi:
+    build: ./backend-fastapi
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/mi_db
+      REDIS_HOST: redis
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8000:8000"
