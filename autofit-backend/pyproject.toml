@@ -1,0 +1,54 @@
+[project]
+name = "autofit-backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.118.0",
+    "psycopg[binary]>=3.2.10",
+    "pydantic>=2.11.9",
+    "pydantic-settings>=2.0.0",
+    "sqlalchemy>=2.0.43",
+    "uvicorn>=0.37.0",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18.2",
+    "ruff>=0.13.3",
+    "poethepoet>=0.24.0",
+]
+
+[tool.poe.tasks]
+# Development server
+dev = {cmd = "uvicorn src.main:app --reload --host 0.0.0.0 --port 8000", help = "Run the development server with auto-reload"}
+serve = {cmd = "python -m src.main", help = "Run the server"}
+
+# Testing tasks
+test = {cmd = "python -m src.tests.test_api", help = "Run basic API tests"}
+test-full = {cmd = "python -m src.tests.test_comprehensive", help = "Run comprehensive test suite"}
+
+# Code quality tasks
+lint = {cmd = "ruff check src/", help = "Run linter on source code"}
+format = {cmd = "ruff format src/", help = "Format source code"}
+typecheck = {cmd = "mypy src/", help = "Run type checking"}
+fix = {cmd = "ruff check --fix src/", help = "Auto-fix linting issues"}
+
+# Combined tasks
+check = {sequence = ["lint", "typecheck"], help = "Run all code quality checks"}
+qa = {sequence = ["fix", "format", "check", "test"], help = "Run full QA suite"}
+
+# Database tasks (placeholder for future)
+db-init = {cmd = "echo 'Database initialization not implemented yet'", help = "Initialize database"}
+db-migrate = {cmd = "echo 'Database migration not implemented yet'", help = "Run database migrations"}
+
+# Documentation
+docs = {cmd = "echo 'API docs available at http://localhost:8000/docs when server is running'", help = "Show API documentation URL"}
+
+# Clean tasks
+clean = {shell = "find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true", help = "Clean Python cache files"}
+clean-all = {sequence = ["clean"], help = "Clean all generated files"}
+
+[tool.poe.executor]
+type = "poetry"
