@@ -1,99 +1,118 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Grid, Typography, TextField, Button, Paper } from "@mui/material";
-import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import Register from "./Register";
+import { Input } from "@progress/kendo-react-inputs";
+import { Button } from "@progress/kendo-react-buttons";
+import logo from "../../images/logo.jpg";
+import "@progress/kendo-theme-default/dist/all.css";
 
 export default function Login() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
-    <Box sx={{ minHeight: "100vh", background: "#fff" }}>
-      <Grid container sx={{ minHeight: "100vh" }}>
-        {/* Columna izquierda: fondo azul con imagen y beneficios */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            background: "linear-gradient(rgba(20,58,140,0.85), rgba(20,58,140,0.85)), url('/images/apymsa-bg.jpg') center/cover",
+    <div style={{ minHeight: "100vh", background: "#fff" }}>
+      <div style={{ display: "flex", minHeight: "100vh" }}>
+        {/* Left Panel - Hidden on mobile */}
+        <div
+          style={{
+            flex: "0 0 20%",
+            background:
+              "linear-gradient(rgba(5, 79, 40, 0.7), rgba(5, 79, 40, 0.7)), url('/images/apymsa-bg.jpg') center/cover",
             color: "#fff",
-            display: { xs: "none", md: "flex" },
+            display: window.innerWidth < 960 ? "none" : "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             position: "relative",
-            px: 20,
           }}
-        >
-        </Grid>
+        ></div>
 
-        {/* Columna derecha: login */}
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
+        {/* Right Panel - Centered Login Form */}
+        <div
+          style={{
+            flex: "1",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             background: "#fff",
-            py: 2,
+            padding: "0 16px",
           }}
         >
-          <Paper elevation={0} sx={{ p: 15, width: "100%", maxWidth: 350 }}>
-            <Box sx={{ textAlign: "center", mb: 3 }}>
+          <div
+            style={{
+              width: "100%",
+              maxWidth: 400,
+              textAlign: "center",
+            }}
+          >
+            {/* Logo */}
+            <div style={{ marginBottom: 24 }}>
               <img
-                src="https://www.apymsa.com.mx/Content/Images/Logo-Apymsa-2024.png"
-                alt="APYMSA"
-                style={{ width: 180, marginBottom: 16 }}
+                src={logo}
+                alt="AUTOFIT360"
+                style={{ width: 280, marginBottom: 16 }}
               />
-            </Box>
-            <TextField
-              label="Correo electrónico"
-              fullWidth
-              margin="normal"
-              size="small"
-            />
-            <TextField
-              label="Contraseña"
-              type="password"
-              fullWidth
-              margin="normal"
-              size="small"
-            />
+            </div>
+
+            {/* Email Input */}
+            <div style={{ marginBottom: 16 }}>
+              <Input label="Correo electrónico" style={{ width: "100%" }} />
+            </div>
+
+            {/* Password Input */}
+            <div style={{ marginBottom: 16 }}>
+              <Input
+                label="Contraseña"
+                type="password"
+                style={{ width: "100%" }}
+              />
+            </div>
+
+            {/* Login Button */}
             <Button
-              variant="contained"
-              fullWidth
-              sx={{
-                mt: 2,
-                background: "#e30613",
-                color: "#fff",
+              themeColor="primary"
+              fillMode="solid"
+              size="large"
+              style={{
+                width: "100%",
+                marginTop: 16,
+                background: "#0d47a1 ",
+                borderColor: "#0d47a1 ",
                 fontWeight: 700,
-                borderRadius: 2,
-                "&:hover": { background: "#b0000f" },
+                borderRadius: 8,
               }}
             >
               Iniciar sesión
             </Button>
-            <Typography
-      variant="body2"
-      sx={{ mt: 2, textAlign: "center", color: "#143a8c", cursor: "pointer" }}
-      onClick={() => navigate("/register")}
-    >
-      Registrarse como usuario nuevo
-    </Typography>
-            <Typography variant="body2" sx={{ mt: 2, textAlign: "center", color: "#e30613" }}>
+
+            {/* Register Link */}
+            <div
+              style={{
+                marginTop: 16,
+                textAlign: "center",
+                color: "#143a8c",
+                cursor: "pointer",
+                fontSize: "0.875rem",
+              }}
+              onClick={() => navigate("/register")}
+            >
+              Registrarse como usuario nuevo
+            </div>
+
+            {/* Forgot Password Link */}
+            <div
+              style={{
+                marginTop: 16,
+                textAlign: "center",
+                color: "#e30613",
+                fontSize: "0.875rem",
+                cursor: "pointer",
+              }}
+            >
               ¿Olvidaste tu contraseña?
-            </Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Box>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
